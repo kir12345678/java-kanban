@@ -8,11 +8,11 @@ public class Task {
     private int id;
     private Status status;
 
-    public Task(String name, String description, int id, Status status) {
+    public Task(String name, String description, int id) {
         this.name = name;
         this.description = description;
         this.id = id;
-        this.status = status;
+        this.status = Status.NEW;
     }
 
     @Override
@@ -40,5 +40,13 @@ public class Task {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

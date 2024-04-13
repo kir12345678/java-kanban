@@ -1,5 +1,5 @@
 package model;
 
 public enum Status {
-    NEW, IN_PROGRESS, DOME
+    NEW, IN_PROGRESS, DONE
 }
