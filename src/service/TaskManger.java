@@ -2,23 +2,19 @@ package service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
-import model.Status;
 import model.Task;
 import model.SubTask;
 import model.Epic;
 
 public class TaskManger {
     private int seq = 0;
-    private HashMap<Integer, Task> tasks;
-    private HashMap<Integer, SubTask> subTasks;
-    private HashMap<Integer, Epic> epics;
 
-    public TaskManger() {
-        tasks =  new HashMap<>();
-        subTasks = new HashMap<>();
-        epics = new HashMap<>();
-    }
+    private Map<Integer, Task> tasks = new HashMap<>();
+    private Map<Integer, SubTask> subTasks = new HashMap<>();
+    private Map<Integer, Epic> epics= new HashMap<>();
+
     public int genId() {
         return seq++;
     }
@@ -30,12 +26,8 @@ public class TaskManger {
     }
 
     public SubTask save(SubTask subTask) {
-        /*subTask.setId(genId());
-        subTasks.put(subTask.getId(), subTask);
-        return subTask;*/
         Epic epic = epics.get(subTask.getEpic().getId());
-        epic.AddSubTask(subTask);
-        //epic.updateStatus();
+        epic.addSubTask(subTask);
         subTasks.put(subTask.getId(), subTask);
         return subTask;
     }
@@ -47,22 +39,34 @@ public class TaskManger {
     }
     //---------
 
-    public HashMap<Integer, Task> getAllTasks() {
-        return this.tasks;
+    public ArrayList<Task> getAllTasks() {
+        ArrayList<Task> listTasks = new ArrayList<>();
+        listTasks.addAll(tasks.values());
+        return listTasks;
     }
-    public HashMap<Integer, SubTask> getAllSubTasks() {
-        return this.subTasks;
+    public ArrayList<SubTask> getAllSubTasks() {
+        ArrayList<SubTask> listSubTasks = new ArrayList<>();
+        listSubTasks.addAll(subTasks.values());
+        return listSubTasks;
     }
-    public HashMap<Integer, Epic> getAllEpics() {
-        return this.epics;
+    public ArrayList<Epic> getAllEpics() {
+        ArrayList<Epic> listEpics = new ArrayList<>();
+        listEpics.addAll(epics.values());
+        return listEpics;
     }
 
     public Task getTask(int id) {
         return this.tasks.get(id);
     }
+
     public SubTask getSubTask(int id) {
         return this.subTasks.get(id);
     }
+
+    public ArrayList<SubTask> getAllSubTasksByEpic(Epic epic) {
+        return epic.getSubTasks();
+    }
+
     public Epic getEpic(int id) {
         return this.epics.get(id);
     }
@@ -73,8 +77,12 @@ public class TaskManger {
 
     public void delAllSubTasks()
     {
+        for (Epic epic : epics.values()) {
+            epic.delAllSubTask();
+        }
         this.subTasks.clear();
     }
+
     public void delAllEpics() {
         delAllSubTasks();
         this.epics.clear();
@@ -86,7 +94,7 @@ public class TaskManger {
 
     public void delSubTask(int id) {
         SubTask subTask = this.subTasks.get(id);
-        subTask.getEpic().DelSubTask(subTask);
+        subTask.getEpic().delSubTask(subTask);
         this.subTasks.remove(id);
     }
     public void delEpic(int id) {
@@ -95,7 +103,7 @@ public class TaskManger {
         for (SubTask subTask : subTasks) {
             this.subTasks.remove(subTask.getId());
         }
-        epic.DelAllSubTask();
+        epic.delAllSubTask();
         this.epics.remove(id);
     }
 
@@ -104,6 +112,7 @@ public class TaskManger {
     }
     public void updateSubTask(SubTask subTask) {
         subTasks.put(subTask.getId(), subTask);
+        subTask.getEpic().updateStatus();
     }
     public void updateEpic(Epic epic) {
         epics.put(epic.getId(), epic);

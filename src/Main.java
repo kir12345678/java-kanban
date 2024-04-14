@@ -4,6 +4,7 @@ import service.TaskManger;
 import model.Task;
 import model.SubTask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 //import java.util.HashMap;
@@ -13,16 +14,20 @@ public class Main {
     public static void main(String[] args) {
         //System.out.println("Поехали!");
         // ---------------- создаем и печатаем 2 задачи -------------------
-       /* TaskManger taskManager = new TaskManger();
+       /*
+        TaskManger taskManager = new TaskManger();
         taskManager.save(new Task("Задача1","Задача1", taskManager.genId()));
         taskManager.save(new Task("Задача2","Задача2", taskManager.genId()));
         //System.out.println(taskManager.getTask(1).getName());
 
-        HashMap<Integer, Task> tasksTest;
+        //HashMap<Integer, Task> tasksTest;
+        ArrayList<Task> tasksTest;
         tasksTest = taskManager.getAllTasks();
-        for (Task task: tasksTest.values()) {
+        for (Task task: tasksTest) {
             System.out.println(task.getId() + " " + task.getName());
         }
+
+
         // ------ Эпик с 1 подзадачей и эпик с 2мя подзадачами ----------------------
         Epic epic1 = new Epic("Эпик1","Эпик1", taskManager.genId());
         SubTask subTask1 = new SubTask("Подзадача1", "Подзадача1", taskManager.genId(), epic1);
@@ -65,7 +70,7 @@ public class Main {
         for (SubTask subTask: allSubTasks.values()) {
             System.out.println(subTask.getId() + " " + subTask.getName());
         }
-*/
+      */
 
     }
 }
