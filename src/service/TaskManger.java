@@ -40,19 +40,15 @@ public class TaskManger {
     //---------
 
     public ArrayList<Task> getAllTasks() {
-        ArrayList<Task> listTasks = new ArrayList<>();
-        listTasks.addAll(tasks.values());
-        return listTasks;
+        return new ArrayList<>(tasks.values());
     }
+
     public ArrayList<SubTask> getAllSubTasks() {
-        ArrayList<SubTask> listSubTasks = new ArrayList<>();
-        listSubTasks.addAll(subTasks.values());
-        return listSubTasks;
+        return new ArrayList<>(subTasks.values());
     }
+
     public ArrayList<Epic> getAllEpics() {
-        ArrayList<Epic> listEpics = new ArrayList<>();
-        listEpics.addAll(epics.values());
-        return listEpics;
+        return new ArrayList<>(epics.values());
     }
 
     public Task getTask(int id) {
@@ -63,7 +59,7 @@ public class TaskManger {
         return this.subTasks.get(id);
     }
 
-    public ArrayList<SubTask> getAllSubTasksByEpic(Epic epic) {
+    public ArrayList<SubTask> getEpicSubTasks(Epic epic) {
         return epic.getSubTasks();
     }
 
@@ -75,8 +71,7 @@ public class TaskManger {
         this.tasks.clear();
     }
 
-    public void delAllSubTasks()
-    {
+    public void delAllSubTasks() {
         for (Epic epic : epics.values()) {
             epic.delAllSubTask();
         }
