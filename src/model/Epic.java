@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class Epic extends Task{
+public class Epic extends Task {
     private ArrayList<SubTask> subTasks;
 
     public Epic(String name, String description) {
