@@ -11,12 +11,12 @@ class TaskMangerTest {
     static TaskManager taskManager;
 
     private static void printAllTasks(TaskManager manager) {
-        System.out.println("Задачи:");
+        System.out.println("Р—Р°РґР°С‡Рё:");
         for (Task task : manager.getAllTasks()) {
             System.out.println("ID = " + task.getId() + " " + task.getName());
         }
 
-        System.out.println("Эпики:");
+        System.out.println("Р­РїРёРєРё:");
         for (Epic epic : manager.getAllEpics()) {
             System.out.println("ID = " + epic.getId() + " " + epic.getName());
 
@@ -25,12 +25,12 @@ class TaskMangerTest {
             }
         }
 
-        System.out.println("Подзадачи:");
+        System.out.println("РџРѕРґР·Р°РґР°С‡Рё:");
         for (SubTask subTask : manager.getAllSubTasks()) {
             System.out.println("ID = " + subTask.getId() + " " + subTask.getName());
         }
 
-        System.out.println("\n" + "История:");
+        System.out.println("\n" + "РСЃС‚РѕСЂРёСЏ:");
         for (Task task : taskManager.getHistoryManager().getHistory()) {
             System.out.println(task.getId() + " " + task.getName());
         }
@@ -39,9 +39,9 @@ class TaskMangerTest {
     static void  beforeAll() {
         taskManager = Managers.getDefault();
 
-        taskManager.save(new Task("Задача1","Задача1"));
-        taskManager.save(new Task("Задача2","Задача2"));
-        taskManager.save(new Task("Задача3","Задача3"));
+        taskManager.save(new Task("Р—Р°РґР°С‡Р°1","Р—Р°РґР°С‡Р°1"));
+        taskManager.save(new Task("Р—Р°РґР°С‡Р°2","Р—Р°РґР°С‡Р°2"));
+        taskManager.save(new Task("Р—Р°РґР°С‡Р°3","Р—Р°РґР°С‡Р°3"));
 
         Epic epic1 = new Epic("Epic1","Epic1");
         Epic epic2 = new Epic("Epic2","Epic2");
