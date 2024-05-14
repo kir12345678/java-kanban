@@ -7,6 +7,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 class TaskMangerTest {
     static TaskManager taskManager;
 
@@ -66,6 +70,22 @@ class TaskMangerTest {
     @DisplayName("look at the CMD")
     void shouldPrintAllTasks() {
         printAllTasks(taskManager);
+    }
+    @Test
+    void shouldBehHistoryNotEmpty() {
+        assertTrue(taskManager.getHistoryManager().getHistory().size() > 0 , "История пуста.");
+    }
+    @Test
+    void shouldBeLengthHistoryEqual6() {
+        assertEquals(taskManager.getHistoryManager().getHistory().size(), 5 , "Есть дубликаты задач.");
+    }
+    @Test
+    void shouldBeDeleteIdEqual3() {
+        List<Task> history = taskManager.getHistoryManager().getHistory();
+        taskManager.getHistoryManager().remove(3);
+        for (Task task : taskManager.getHistoryManager().getHistory()) {
+            assertFalse(task.getId() == 3 , "Просмотр не удалился из истории.");
+        }
     }
 
 }
