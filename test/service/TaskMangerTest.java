@@ -15,7 +15,7 @@ class TaskMangerTest {
     static TaskManager taskManager;
 
     private static void printAllTasks(TaskManager manager) {
-        System.out.println("Задачи:");
+        System.out.println("Subtasks:");
         for (Task task : manager.getAllTasks()) {
             System.out.println("ID = " + task.getId() + " " + task.getName());
         }
