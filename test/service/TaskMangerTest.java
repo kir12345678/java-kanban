@@ -20,7 +20,7 @@ class TaskMangerTest {
             System.out.println("ID = " + task.getId() + " " + task.getName());
         }
 
-        System.out.println("Эпики:");
+        System.out.println("Epics:");
         for (Epic epic : manager.getAllEpics()) {
             System.out.println("ID = " + epic.getId() + " " + epic.getName());
 
@@ -29,12 +29,12 @@ class TaskMangerTest {
             }
         }
 
-        System.out.println("Подзадачи:");
+        System.out.println("Subtasks:");
         for (SubTask subTask : manager.getAllSubTasks()) {
             System.out.println("ID = " + subTask.getId() + " " + subTask.getName());
         }
 
-        System.out.println("\n" + "История:");
+        System.out.println("\n" + "History:");
         for (Task task : taskManager.getHistoryManager().getHistory()) {
             System.out.println(task.getId() + " " + task.getName());
         }
@@ -43,9 +43,9 @@ class TaskMangerTest {
     static void  beforeAll() {
         taskManager = Managers.getDefault();
 
-        taskManager.save(new Task("Задача1","Задача1"));
-        taskManager.save(new Task("Задача2","Задача2"));
-        taskManager.save(new Task("Задача3","Задача3"));
+        taskManager.save(new Task("Task1","Task1"));
+        taskManager.save(new Task("Task2","Task2"));
+        taskManager.save(new Task("Task3","Task3"));
 
         Epic epic1 = new Epic("Epic1","Epic1");
         Epic epic2 = new Epic("Epic2","Epic2");
@@ -73,18 +73,18 @@ class TaskMangerTest {
     }
     @Test
     void shouldBehHistoryNotEmpty() {
-        assertTrue(taskManager.getHistoryManager().getHistory().size() > 0 , "История пуста.");
+        assertTrue(taskManager.getHistoryManager().getHistory().size() > 0 , "History is empty.");
     }
     @Test
     void shouldBeLengthHistoryEqual6() {
-        assertEquals(taskManager.getHistoryManager().getHistory().size(), 5 , "Есть дубликаты задач.");
+        assertEquals(taskManager.getHistoryManager().getHistory().size(), 5 , "There are duplicate tasks.");
     }
     @Test
     void shouldBeDeleteIdEqual3() {
         List<Task> history = taskManager.getHistoryManager().getHistory();
         taskManager.getHistoryManager().remove(3);
         for (Task task : taskManager.getHistoryManager().getHistory()) {
-            assertFalse(task.getId() == 3 , "Просмотр не удалился из истории.");
+            assertFalse(task.getId() == 3 , "The view was not deleted from the history.");
         }
     }
 
