@@ -6,19 +6,21 @@ import model.Task;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class TaskMangerTest {
     static TaskManager taskManager;
 
     private static void printAllTasks(TaskManager manager) {
-        System.out.println("Задачи:");
+        System.out.println("Subtasks:");
         for (Task task : manager.getAllTasks()) {
             System.out.println("ID = " + task.getId() + " " + task.getName());
         }
 
-        System.out.println("Эпики:");
+        System.out.println("Epics:");
         for (Epic epic : manager.getAllEpics()) {
             System.out.println("ID = " + epic.getId() + " " + epic.getName());
 
@@ -27,42 +29,41 @@ class TaskMangerTest {
             }
         }
 
-        System.out.println("Подзадачи:");
+        System.out.println("Subtasks:");
         for (SubTask subTask : manager.getAllSubTasks()) {
             System.out.println("ID = " + subTask.getId() + " " + subTask.getName());
         }
 
-        System.out.println("История:");
+        System.out.println("\n" + "History:");
         for (Task task : taskManager.getHistoryManager().getHistory()) {
-            System.out.println(task.getName());
+            System.out.println(task.getId() + " " + task.getName());
         }
     }
     @BeforeAll
     static void  beforeAll() {
         taskManager = Managers.getDefault();
 
-        taskManager.save(new Task("Задача1","Задача1"));
-        taskManager.save(new Task("Задача2","Задача2"));
+        taskManager.save(new Task("Task1","Task1"));
+        taskManager.save(new Task("Task2","Task2"));
+        taskManager.save(new Task("Task3","Task3"));
 
         Epic epic1 = new Epic("Epic1","Epic1");
+        Epic epic2 = new Epic("Epic2","Epic2");
         SubTask subTask1 = new SubTask("SubTask1","SubTask1", epic1);
         SubTask subTask2 = new SubTask("SubTask2","SubTask2", epic1);
         taskManager.save(epic1);
+        taskManager.save(epic2);
         taskManager.save(subTask1);
         taskManager.save(subTask2);
 
         taskManager.getTask(1);
-        taskManager.getSubTask(3);
-        taskManager.getEpic(2);
+        taskManager.getSubTask(5);
+        taskManager.getEpic(3);
         taskManager.getTask(1);
-        taskManager.getEpic(2);
-        taskManager.getSubTask(3);
-        taskManager.getEpic(2);
-        taskManager.getTask(1);
-        taskManager.getEpic(2);
-        taskManager.getEpic(2);
-        taskManager.getEpic(2);
-
+        taskManager.getEpic(3);
+        taskManager.getEpic(4);
+        taskManager.getSubTask(6);
+        taskManager.getSubTask(5);
 
     }
     @Test
@@ -71,12 +72,20 @@ class TaskMangerTest {
         printAllTasks(taskManager);
     }
     @Test
-    void ShouldBeFillFullHistory(){
-        assertEquals(taskManager.getHistoryManager().getHistory().size(), 10,"История не заполнена.");
+    void shouldBehHistoryNotEmpty() {
+        assertTrue(taskManager.getHistoryManager().getHistory().size() > 0 , "History is empty.");
     }
     @Test
-    void shouldBeFirstTaskIsSubTask1() {
-        List<Task> history = taskManager.getHistoryManager().getHistory();
-        assertEquals(history.get(0).getName(), "SubTask1", "На первом месте не SubTask1. Не было сдвига в истории.");
+    void shouldBeLengthHistoryEqual6() {
+        assertEquals(taskManager.getHistoryManager().getHistory().size(), 5 , "There are duplicate tasks.");
     }
+    @Test
+    void shouldBeDeleteIdEqual3() {
+        List<Task> history = taskManager.getHistoryManager().getHistory();
+        taskManager.getHistoryManager().remove(3);
+        for (Task task : taskManager.getHistoryManager().getHistory()) {
+            assertFalse(task.getId() == 3 , "The view was not deleted from the history.");
+        }
+    }
+
 }
