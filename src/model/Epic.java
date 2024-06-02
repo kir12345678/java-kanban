@@ -63,6 +63,7 @@ public class Epic extends Task {
     public Integer getEpicId() {
         return this.getId();
     }
+
     @Override
     public TypeTask getTypeTask() {
         return TypeTask.EPIC;
