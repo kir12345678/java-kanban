@@ -11,7 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class FileBackedTaskManager extends InMemoryTaskManager{
+public class FileBackedTaskManager extends InMemoryTaskManager {
     private final String filename;
 
     private void createFile(String filename) {
@@ -64,19 +64,19 @@ public class FileBackedTaskManager extends InMemoryTaskManager{
 
     private void readFromFile() {
         int maxId = 0;
-        try ( FileReader reader = new FileReader(filename, StandardCharsets.UTF_8);
-              BufferedReader bufferedReader = new BufferedReader(reader) ) {
+        try (FileReader reader = new FileReader(filename, StandardCharsets.UTF_8);
+              BufferedReader bufferedReader = new BufferedReader(reader)) {
             bufferedReader.readLine();
             while (bufferedReader.ready()) {
                 String line = bufferedReader.readLine();
                 Task task = fromString(line);
 
                 int id = task.getId();
-                if (task.getTypeTask()==TypeTask.TASK) {
+                if (task.getTypeTask() == TypeTask.TASK) {
                     tasks.put(id, task);
-                } else if (task.getTypeTask()==TypeTask.SUBTASK) {
+                } else if (task.getTypeTask() == TypeTask.SUBTASK) {
                     subTasks.put(id, (SubTask) task);
-                } else if (task.getTypeTask()==TypeTask.EPIC) {
+                } else if (task.getTypeTask() == TypeTask.EPIC) {
                     epics.put(id, (Epic) task);
                 }
                 if (maxId < id) {
