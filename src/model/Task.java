@@ -63,6 +63,7 @@ public class Task {
     public TypeTask getTypeTask() {
         return TypeTask.TASK;
     }
+
     public Integer getEpicId() {
         return null;
     }
