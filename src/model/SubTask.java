@@ -21,10 +21,12 @@ public class SubTask extends Task {
         super.setStatus(status);
         this.epic.updateStatus();
     }
+
     @Override
     public TypeTask getTypeTask() {
         return TypeTask.SUBTASK;
     }
+
     @Override
     public Integer getEpicId() {
         return epic.getId();
