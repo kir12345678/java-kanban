@@ -8,6 +8,10 @@ public class SubTask extends Task {
         this.epic = epic;
     }
 
+    public SubTask(int id, String name, String description, Status status, int epicId) {
+        super(id, name, description, status);
+    }
+
     public Epic getEpic() {
         return this.epic;
     }
@@ -16,5 +20,15 @@ public class SubTask extends Task {
     public void setStatus(Status status) {
         super.setStatus(status);
         this.epic.updateStatus();
+    }
+
+    @Override
+    public TypeTask getTypeTask() {
+        return TypeTask.SUBTASK;
+    }
+
+    @Override
+    public Integer getEpicId() {
+        return epic.getId();
     }
 }
