@@ -186,14 +186,14 @@ public class InMemoryTaskManager implements TaskManager {
             endS2 = LocalDateTime.MAX;
         }
 
-        if ( beginS1.isBefore(endS2) && beginS2.isBefore(endS1)) {
+        if (beginS1.isBefore(endS2) && beginS2.isBefore(endS1)) {
             throw new ValidationException("У задач ID = " + s1.getId() + " и ID = " + s2.getId()
                     + "пересекается время выполнения.");
         }
     }
 
     private void checkTaskTime(Task task) {
-        if (task.getStartTime()!=null) {
+        if (task.getStartTime() != null) {
             for (Task tempTask : prioritizedTasks) {
                 if (task.getId() == tempTask.getId()) {
                     continue;
