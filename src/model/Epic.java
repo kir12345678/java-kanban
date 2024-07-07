@@ -78,7 +78,7 @@ public class Epic extends Task {
             subTasks.sort(Comparator.comparing(Task::getStartTime));
             return subTasks.get(0).getStartTime();
         } else {
-            return LocalDateTime.of(3000,1,1,0,0);
+            return LocalDateTime.of(3000, 1, 1, 0, 0);
         }
     }
 
