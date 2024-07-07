@@ -74,7 +74,7 @@ public class Epic extends Task {
 
     @Override
     public LocalDateTime getStartTime() {
-        if (!subTasks.isEmpty()){
+        if (!subTasks.isEmpty()) {
             subTasks.sort(Comparator.comparing(Task::getStartTime));
             return subTasks.get(0).getStartTime();
         } else {
@@ -86,7 +86,7 @@ public class Epic extends Task {
     public LocalDateTime getEndTime() {
         if (!subTasks.isEmpty()) {
             subTasks.sort(Comparator.comparing(Task::getStartTime));
-            return subTasks.get(subTasks.size()-1).getEndTime();
+            return subTasks.get(subTasks.size() - 1).getEndTime();
         } else {
             return null;
         }
