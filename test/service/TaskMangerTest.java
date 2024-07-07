@@ -7,6 +7,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -86,6 +89,20 @@ class TaskMangerTest {
         for (Task task : taskManager.getHistoryManager().getHistory()) {
             assertFalse(task.getId() == 3 , "The view was not deleted from the history.");
         }
+    }
+
+    @Test
+    void ShouldBeOrdered() {
+        LocalDateTime startDate1 = LocalDateTime.of(2024, 6, 23, 15, 33);
+        Duration duration1 = Duration.ofMinutes(15);
+
+        LocalDateTime startDate2 = LocalDateTime.parse("00:00 21.06.2024", DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy"));
+        Duration duration2 = Duration.ofMinutes(15);
+
+        taskManager.save(new Task("Task1", "Task1", startDate1, duration1));
+        taskManager.save(new Task("Task2", "Task2", startDate2, duration2));
+
+        assertEquals(LocalDateTime.of(2024, 6, 23, 15, 33), taskManager.getPrioritizedTask().get(1).getStartTime());
     }
 
 }
