@@ -174,20 +174,20 @@ public class InMemoryTaskManager implements TaskManager {
         return new ArrayList<>(prioritizedTasks);
     }
 
-    private void checkIntersection(Task s1, Task s2) {
-        LocalDateTime beginS1 = s1.getStartTime();
-        LocalDateTime endS1 = s1.getEndTime();
-        LocalDateTime beginS2 = s2.getStartTime();
-        LocalDateTime endS2 = s2.getEndTime();
-        if (endS1 == null) {
-            endS1 = LocalDateTime.MAX;
+    private void checkIntersection(Task taskFirst, Task taskSecond) {
+        LocalDateTime beginTaskFirst = taskFirst.getStartTime();
+        LocalDateTime endTaskFirst = taskFirst.getEndTime();
+        LocalDateTime beginTaskSecond = taskSecond.getStartTime();
+        LocalDateTime endTaskSecond = taskSecond.getEndTime();
+        if (endTaskFirst == null) {
+            endTaskFirst = LocalDateTime.MAX;
         }
-        if (endS2 == null) {
-            endS2 = LocalDateTime.MAX;
+        if (endTaskSecond == null) {
+            endTaskSecond = LocalDateTime.MAX;
         }
 
-        if (beginS1.isBefore(endS2) && beginS2.isBefore(endS1)) {
-            throw new ValidationException("У задач ID = " + s1.getId() + " и ID = " + s2.getId()
+        if (beginTaskFirst.isBefore(endTaskSecond) && beginTaskSecond.isBefore(endTaskFirst)) {
+            throw new ValidationException("У задач ID = " + taskFirst.getId() + " и ID = " + taskSecond.getId()
                     + "пересекается время выполнения.");
         }
     }
