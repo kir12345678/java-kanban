@@ -41,5 +41,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="junit5-r5.10" level="project" />
   </component>
 </module>

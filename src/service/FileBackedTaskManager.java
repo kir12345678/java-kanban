@@ -10,6 +10,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
     private final String filename;
@@ -40,13 +43,16 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     public String toString(Task task) {
-        return String.format("%d, %S, %s, %S, %s, %s", task.getId(), task.getTypeTask(), task.getName(),
-                task.getStatus(), task.getDescription(), task.getEpicId());
+        return String.format("%d, %S, %s, %S, %s, %s, %s, %s", task.getId(), task.getTypeTask(), task.getName(),
+                    task.getStatus(), task.getDescription(), task.getEpicId(),
+                    task.getStartTime().format(DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy")),
+                    task.getDuration().toMinutes()
+                );
     }
 
     public void save() throws ManagerSaveException {
         try (FileWriter writer = new FileWriter(filename, StandardCharsets.UTF_8)) {
-            writer.append("id, type, name, status, description, epic" + "\n");
+            writer.append("id, type, name, status, description, epic, startTime, duration" + "\n");
             for (Task task : getAllTasks()) {
                 writer.write(toString(task) + "\n");
             }
@@ -105,15 +111,22 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         String taskName = arrayField[2];
         Status taskStatus = Status.valueOf(arrayField[3]);
         String taskDescription = arrayField[4];
-        int taskEpicId = Integer.parseInt(arrayField[5]);
+
+        Integer taskEpicId = null;
+        if (typeTask == TypeTask.SUBTASK || typeTask == TypeTask.EPIC) {
+            taskEpicId = Integer.parseInt(arrayField[5]);
+        }
+
+        LocalDateTime taskStartTime = LocalDateTime.parse(arrayField[6], DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy"));
+        Duration taskDuration = Duration.ofMinutes(Long.parseLong(arrayField[7]));
 
         Task task = null;
         switch (typeTask) {
             case TASK:
-                task = new Task(taskId, taskName, taskDescription, taskStatus);
+                task = new Task(taskId, taskName, taskDescription, taskStatus, taskStartTime, taskDuration);
                 break;
             case SUBTASK:
-                task = new SubTask(taskId, taskName, taskDescription, taskStatus, taskEpicId);
+                task = new SubTask(taskId, taskName, taskDescription, taskStatus, taskEpicId, taskStartTime, taskDuration);
                 break;
             case EPIC:
                 task = new Epic(taskId, taskName, taskDescription, taskStatus, taskEpicId);

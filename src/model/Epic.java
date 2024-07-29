@@ -1,6 +1,9 @@
 package model;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Epic extends Task {
     private ArrayList<SubTask> subTasks;
@@ -67,5 +70,34 @@ public class Epic extends Task {
     @Override
     public TypeTask getTypeTask() {
         return TypeTask.EPIC;
+    }
+
+    @Override
+    public LocalDateTime getStartTime() {
+        if (!subTasks.isEmpty()) {
+            subTasks.sort(Comparator.comparing(Task::getStartTime));
+            return subTasks.get(0).getStartTime();
+        } else {
+            return LocalDateTime.of(3000, 1, 1, 0, 0);
+        }
+    }
+
+    @Override
+    public LocalDateTime getEndTime() {
+        if (!subTasks.isEmpty()) {
+            subTasks.sort(Comparator.comparing(Task::getStartTime));
+            return subTasks.get(subTasks.size() - 1).getEndTime();
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public Duration getDuration() {
+        Duration totalDuration = Duration.ofMinutes(0);
+        for (SubTask subTask : subTasks) {
+            totalDuration = totalDuration.plus(subTask.getDuration());
+        }
+        return totalDuration;
     }
 }
