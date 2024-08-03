@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class PrioritizedHttpHandler extends BaseHttpHandler{
+public class PrioritizedHttpHandler extends BaseHttpHandler {
     public PrioritizedHttpHandler(TaskManager taskManager) {
         super(taskManager);
     }

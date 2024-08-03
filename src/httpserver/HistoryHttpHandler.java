@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class HistoryHttpHandler extends BaseHttpHandler{
+public class HistoryHttpHandler extends BaseHttpHandler {
     public HistoryHttpHandler(TaskManager taskManager) {
         super(taskManager);
     }
