@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class EpicHttpHandler extends BaseHttpHandler{
+public class EpicHttpHandler extends BaseHttpHandler {
     public EpicHttpHandler(TaskManager taskManager) {
         super(taskManager);
     }
