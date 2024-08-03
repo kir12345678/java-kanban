@@ -2,8 +2,15 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/Main.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/httpserver" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/httpserver/BaseHttpHandler.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/httpserver/DurationTypeAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/httpserver/EpicHttpHandler.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/httpserver/HistoryHttpHandler.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/httpserver/HttpTaskServer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/httpserver/LocalDateTimeTypeAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/httpserver/PrioritizedHttpHandler.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/httpserver/SubTaskHttpHandler.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/httpserver/TaskHttpHandler.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/model/Epic.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/model/Status.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/model/SubTask.java" charset="UTF-8" />

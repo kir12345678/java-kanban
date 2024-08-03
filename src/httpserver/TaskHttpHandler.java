@@ -37,7 +37,7 @@ public class TaskHttpHandler extends BaseHttpHandler {
                 if (pathParts.length == 2) {
                     Task task = getTaskFromRequestBody(exchange);
                     taskManager.save(task);
-                    writeResponse(exchange, "Создано", 201);
+                    writeResponse(exchange, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ", 201);
                 } else if (pathParts.length == 3) {
                     if (!query.isEmpty()) {
                         Task task = getTaskFromRequestBody(exchange);
@@ -50,17 +50,17 @@ public class TaskHttpHandler extends BaseHttpHandler {
             case "DELETE":
                 if (pathParts.length == 2) {
                     taskManager.delAllTasks();
-                    writeResponse(exchange, "Удалены все задачи", 201);
+                    writeResponse(exchange, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ", 201);
                 } else if (pathParts.length == 3) {
                     if (!query.isEmpty()) {
                         Integer id = Integer.parseInt(query.split("=")[1]);
                         taskManager.delTask(id);
-                        writeResponse(exchange, ("Удалена задача id=" + id), 201);
+                        writeResponse(exchange, ("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ id=" + id), 201);
                     }
                 }
                 break;
             default:
-                writeResponse(exchange, "Неверный запрос", 400);
+                writeResponse(exchange, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ", 400);
         }
 
     }

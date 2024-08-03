@@ -36,7 +36,7 @@ public class EpicHttpHandler extends BaseHttpHandler {
                 if (pathParts.length == 2) {
                     Epic epic = getEpicFromRequestBody(exchange);
                     taskManager.save(epic);
-                    writeResponse(exchange, "Создано", 201);
+                    writeResponse(exchange, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ", 201);
                 } else if (pathParts.length == 3) {
                     if (!query.isEmpty()) {
                         Epic epic = getEpicFromRequestBody(exchange);
@@ -49,17 +49,17 @@ public class EpicHttpHandler extends BaseHttpHandler {
             case "DELETE":
                 if (pathParts.length == 2) {
                     taskManager.delAllEpics();
-                    writeResponse(exchange, "Удалены все задачи", 201);
+                    writeResponse(exchange, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ", 201);
                 } else if (pathParts.length == 3) {
                     if (!query.isEmpty()) {
                         Integer id = Integer.parseInt(query.split("=")[1]);
                         taskManager.delEpic(id);
-                        writeResponse(exchange, ("Удалена задача id=" + id), 201);
+                        writeResponse(exchange, ("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ id=" + id), 201);
                     }
                 }
                 break;
             default:
-                writeResponse(exchange, "Неверный запрос", 400);
+                writeResponse(exchange, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ", 400);
         }
     }
 

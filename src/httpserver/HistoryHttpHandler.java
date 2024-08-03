@@ -25,7 +25,7 @@ public class HistoryHttpHandler extends BaseHttpHandler {
             String listHistory = HttpTaskServer.getGson().toJson(history, listType);
             writeResponse(exchange, listHistory, 200);
         } else {
-            writeResponse(exchange, "Неверный запрос", 400);
+            writeResponse(exchange, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ", 400);
         }
 
     }
