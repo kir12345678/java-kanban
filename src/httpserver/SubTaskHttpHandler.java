@@ -9,11 +9,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
-<<<<<<< HEAD
-public class SubTaskHttpHandler extends BaseHttpHandler{
-=======
 public class SubTaskHttpHandler extends BaseHttpHandler {
->>>>>>> f880c65 (sprint_9-solution-http-api_1)
     public SubTaskHttpHandler(TaskManager taskManager) {
         super(taskManager);
     }
@@ -68,15 +64,9 @@ public class SubTaskHttpHandler extends BaseHttpHandler {
     }
 
     private void handleGetAllSubTasks(HttpExchange exchange) {
-<<<<<<< HEAD
-        List<SubTask> SubTasksList = taskManager.getAllSubTasks();
-        Type listType = new TypeToken<List<Type>>() {}.getType();
-        String listSubTask = HttpTaskServer.getGson().toJson(SubTasksList, listType);
-=======
         List<SubTask> subTasksList = taskManager.getAllSubTasks();
         Type listType = new TypeToken<List<Type>>() {}.getType();
         String listSubTask = HttpTaskServer.getGson().toJson(subTasksList, listType);
->>>>>>> f880c65 (sprint_9-solution-http-api_1)
         try {
             writeResponse(exchange, listSubTask, 200);
         } catch (IOException e) {
