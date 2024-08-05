@@ -25,7 +25,7 @@ public class PrioritizedHttpHandler extends BaseHttpHandler {
             String listPrioritized = HttpTaskServer.getGson().toJson(prioritizedList, listType);
             writeResponse(exchange, listPrioritized, 200);
         } else {
-            writeResponse(exchange, "�������� ������", 400);
+            writeResponse(exchange, "incorrect query", 400);
         }
     }
 }

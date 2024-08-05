@@ -37,7 +37,7 @@ public class TaskHttpHandler extends BaseHttpHandler {
                 if (pathParts.length == 2) {
                     Task task = getTaskFromRequestBody(exchange);
                     taskManager.save(task);
-                    writeResponse(exchange, "�������", 201);
+                    writeResponse(exchange, "Saved", 201);
                 } else if (pathParts.length == 3) {
                     if (!query.isEmpty()) {
                         Task task = getTaskFromRequestBody(exchange);
@@ -50,17 +50,17 @@ public class TaskHttpHandler extends BaseHttpHandler {
             case "DELETE":
                 if (pathParts.length == 2) {
                     taskManager.delAllTasks();
-                    writeResponse(exchange, "������� ��� ������", 201);
+                    writeResponse(exchange, "delete all tasks", 201);
                 } else if (pathParts.length == 3) {
                     if (!query.isEmpty()) {
                         Integer id = Integer.parseInt(query.split("=")[1]);
                         taskManager.delTask(id);
-                        writeResponse(exchange, ("������� ������ id=" + id), 201);
+                        writeResponse(exchange, ("delete task id=" + id), 201);
                     }
                 }
                 break;
             default:
-                writeResponse(exchange, "�������� ������", 400);
+                writeResponse(exchange, "incorrect query", 400);
         }
 
     }
